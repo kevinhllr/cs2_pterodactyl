@@ -59,17 +59,22 @@ mkdir -p /mnt/server/.steam/sdk64
 cp -v linux64/steamclient.so ../.steam/sdk64/steamclient.so
 
 # Custom Setup Below
+Red='\033[0;31m' # Red
+Green='\033[0;32m' # Green
+Color_Off='\033[0m' # No Color
+
 # Install unzip
 apt-get install unzip
+
 # Function to print error and exit
 error_exit() {
-    echo "[ERROR] $1" >&2
+    echo -e "${Red}[ERROR] $1${Color_Off}" >&2
     exit 1
 }
 
 # Function to download and extract Metamod and CounterStrikeSharp
 install_metamod() {
-    echo "[INFO] Installing Metamod..."
+    echo -e "${Green}[INFO] Installing Metamod...${Color_Off}"
     wget -nv "${VERSION_METAMOD}" || error_exit "Failed to download Metamod."
     tar -xf "$(basename ${VERSION_METAMOD})" || error_exit "Failed to extract Metamod."
     rm -f "$(basename ${VERSION_METAMOD})"
@@ -77,7 +82,7 @@ install_metamod() {
 
 # Function to download and extract CounterStrikeSharp
 install_counterstrikesharp() {
-    echo "[INFO] Installing CounterStrikeSharp..."
+    echo -e "${Green}[INFO] Installing CounterStrikeSharp...${Color_Off}"
     wget -nv "${VERSION_CSSHARP}" || error_exit "Failed to download CounterStrikeSharp."
     unzip -o -q "$(basename ${VERSION_CSSHARP})" || error_exit "Failed to extract CounterStrikeSharp."
     rm -f "$(basename ${VERSION_CSSHARP})"
@@ -85,7 +90,7 @@ install_counterstrikesharp() {
 
 # Function to download and extract MatchZy
 install_matchzy() {
-    echo "[INFO] Installing MatchZy..."
+    echo -e "${Green}[INFO] Installing MatchZy...${Color_Off}"
     wget -nv "${VERSION_MATCHZY}" || error_exit "Failed to download MatchZy."
     unzip -o -q "$(basename ${VERSION_MATCHZY})" || error_exit "Failed to extract MatchZy."
     rm -f "$(basename ${VERSION_MATCHZY})"
@@ -104,6 +109,7 @@ if [ "${VERSION_MATCHZY}" != "0" ]; then
    cp -r addons "/mnt/server/game/csgo/" || error_exit "Failed to copy addons to target."
    cp -r cfg "/mnt/server/game/csgo/" || error_exit "Failed to copy cfg to target."
 fi
-if [ "${EVERYONE_IS_ADMIN}" -eq "1"]; then
-   sed -i  "s/matchzy_everyone_is_admin false/matchzy_everyone_is_admin true/g" "csgo/cfg/MatchZy/config.cfg"
+if [ "${EVERYONE_IS_ADMIN}" -eq "1" ]; then
+   sed -i  "s/matchzy_everyone_is_admin false/matchzy_everyone_is_admin true/g" "/mnt/server/game/csgo/cfg/MatchZy/config.cfg"
 fi
+echo -e "${Green}[INFO] Installation Successfull...${Color_Off}"
