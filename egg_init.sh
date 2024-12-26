@@ -59,6 +59,8 @@ mkdir -p /mnt/server/.steam/sdk64
 cp -v linux64/steamclient.so ../.steam/sdk64/steamclient.so
 
 # Custom Setup Below
+# Install unzip
+apt-get install unzip
 # Function to print error and exit
 error_exit() {
     echo "[ERROR] $1" >&2
