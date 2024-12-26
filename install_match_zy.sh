@@ -25,7 +25,7 @@ validate_target() {
     fi
 }
 
-# Function to download and extract Metamod
+# Function to download and extract MatchZy
 install_matchzy() {
     echo "[INFO] Installing MatchZy..."
     wget -nv "$VERSION_MATCHZY" || error_exit "Failed to download MatchZy."
