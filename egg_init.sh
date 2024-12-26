@@ -59,6 +59,11 @@ mkdir -p /mnt/server/.steam/sdk64
 cp -v linux64/steamclient.so ../.steam/sdk64/steamclient.so
 
 # Custom Setup Below
+# Function to print error and exit
+error_exit() {
+    echo "[ERROR] $1" >&2
+    exit 1
+}
 
 # Function to download and extract Metamod and CounterStrikeSharp
 install_metamod() {
